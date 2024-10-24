@@ -99,9 +99,10 @@ func (c *Client) Login(ctx context.Context, handle string, appkey string) error 
 	if err != nil {
 		return err
 	}
+	fmt.Printf("%v",token.Claims)
 	if token.Claims.(jwt.MapClaims)["scope"] != "com.atproto.appPass" {
 		return fmt.Errorf("%w: %w", ErrLoginUnauthorized, ErrMasterCredentials)
-	}
+	} 
 	// Retrieve the expirations for the current and refresh JWT tokens
 	current, err := token.Claims.GetExpirationTime()
 	if err != nil {
